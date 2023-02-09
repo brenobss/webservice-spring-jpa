@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.brenobss.webservicespringjpa.entities.Category;
 import com.brenobss.webservicespringjpa.entities.Order;
+import com.brenobss.webservicespringjpa.entities.OrderItem;
 import com.brenobss.webservicespringjpa.entities.Product;
 import com.brenobss.webservicespringjpa.entities.User;
 import com.brenobss.webservicespringjpa.entities.enums.OrderStatus;
 import com.brenobss.webservicespringjpa.repositories.CategoryRepository;
+import com.brenobss.webservicespringjpa.repositories.OrderItemRepository;
 import com.brenobss.webservicespringjpa.repositories.OrderRepository;
 import com.brenobss.webservicespringjpa.repositories.ProductRepository;
 import com.brenobss.webservicespringjpa.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,6 +74,13 @@ public class TestConfig implements CommandLineRunner{
 		userRepository.saveAll(Arrays.asList(maria, alex));
 		
 		orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+		
+		OrderItem orderItem1 = new OrderItem(order1, product1, 2, product1.getPrice()); 
+		OrderItem orderItem2 = new OrderItem(order1, product3, 1, product3.getPrice()); 
+		OrderItem orderItem3 = new OrderItem(order2, product3, 2, product3.getPrice()); 
+		OrderItem orderItem4 = new OrderItem(order3, product5, 2, product5.getPrice()); 
+
+		orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
 		
 	}
 	
