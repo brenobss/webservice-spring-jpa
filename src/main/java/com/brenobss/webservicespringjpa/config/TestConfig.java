@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.brenobss.webservicespringjpa.entities.Category;
 import com.brenobss.webservicespringjpa.entities.Order;
 import com.brenobss.webservicespringjpa.entities.OrderItem;
+import com.brenobss.webservicespringjpa.entities.Payment;
 import com.brenobss.webservicespringjpa.entities.Product;
 import com.brenobss.webservicespringjpa.entities.User;
 import com.brenobss.webservicespringjpa.entities.enums.OrderStatus;
@@ -81,6 +82,12 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem orderItem4 = new OrderItem(order3, product5, 2, product5.getPrice()); 
 
 		orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
+		
+		Payment payment1 = new Payment(null, Instant.parse("2019-06-20T19:53:07Z"), order1);
+		
+		order1.setPayment(payment1);
+		
+		orderRepository.save(order1);
 		
 	}
 	
